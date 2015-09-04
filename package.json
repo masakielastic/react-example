@@ -1,0 +1,10 @@
+{
+  "name": "react-example",
+  "private": true,
+  "license": "MIT",
+  "description": "React.js Example",
+  "version": "0.1.0",
+  "dependencies": {
+    "react": "*"
+  }
+}
