@@ -1,10 +1,7 @@
-var HelloMessage = React.createClass({
+var MyComponent = React.createClass({
   render: function() {
-    return <div>Hello {this.props.name}</div>;
+    return <div>Hello World</div>;
   }
 });
 
-React.render(
-  <HelloMessage name="Masaki" />,
-  document.getElementById('container')
-);
+ReactDOM.render(<MyComponent />, document.getElementById('container'));
