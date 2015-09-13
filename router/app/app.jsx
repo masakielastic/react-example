@@ -18,38 +18,51 @@ class App extends React.Component {
   }
 }
 
-class Home extends React.Component {
+class Message extends React.Component {
+
+  getPage(name) {
+    let pages = [
+      {name: 'index', title: 'ホーム', body: 'ホームの内容'},
+      {name: 'about', title: '自己紹介', body: '自己紹介の内容'},
+      {name: 'contact', title: '問い合わせ', body: '問い合わせの内容'}
+    ]
+
+    for (let page of pages) {
+
+      if (name === page.name) {
+        return page
+      }
+    }
+
+    return {
+      name: name,
+      title: 'エラー',
+      body: 'ページは存在しません。'
+    }
+  }
+
   render() {
-    return <h3>ホーム</h3>
+    let name = this.props.params.name
+
+    if (typeof name === 'undefined') {
+      name = 'index'
+    }
+
+    let page = this.getPage(name)
+
+    return <div>
+             <h3>{page.title}</h3>
+             <p>{page.body}</p>
+           </div>
   }
 }
 
-class About extends React.Component {
-  render() {
-    return <h3>自己紹介</h3>
-  }
-}
-
-class Contact extends React.Component {
-  render() {
-    return <h3>問い合わせ</h3>
-  }
-}
-
-class NoMatch extends React.Component {
-  render() {
-    return <h3>存在しないページです。</h3>
-  }
-}
-
-ReactDOM.render(
+ReactDOM.render((
   <Router history={createBrowserHistory()}>
-    <Route path="/react-example/router" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="about" component={About} />
-      <Route path="contact" component={Contact} />
-      <Route path="*" component={NoMatch}/>
+    <Route path="react-example/router" component={App}>
+      <IndexRoute component={Message}/>
+      <Route path=":name" component={Message} />
     </Route>
   </Router>
-, document.getElementById('container'))
+), document.getElementById('container'))
 
